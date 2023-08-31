@@ -1,0 +1,64 @@
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise7
+Switched to a new branch 'exercise7'
+branch 'exercise7' set up to track 'origin/exercise7'.
+PS D:\git_exercises\advanced-git-exercises>  echo "This is the first file" > first.txt
+PS D:\git_exercises\advanced-git-exercises> echo "This is the second file" > second.txt
+PS D:\git_exercises\advanced-git-exercises> git add first.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Committing two new files"
+[exercise7 2d91275] Committing two new files
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 first.txt
+PS D:\git_exercises\advanced-git-exercises> git add second.txt
+PS D:\git_exercises\advanced-git-exercises> git commit --amend
+[exercise7 08dea23] Committing two new files
+ Date: Fri Sep 1 00:04:49 2023 +0700
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 first.txt
+ create mode 100644 second.txt
+PS D:\git_exercises\advanced-git-exercises> git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+PS D:\git_exercises\advanced-git-exercises> git checkout -b exercise7-2
+Switched to a new branch 'exercise7-2'
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+43388fe (HEAD -> exercise7-2, origin/master, origin/exercise7, origin/exercise4, origin/exercise2, origin/HEAD, master) Initial commit
+PS D:\git_exercises\advanced-git-exercises> echo "New feature" >
+ feature.txt
+PS D:\git_exercises\advanced-git-exercises> git add feature.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Adding a new feature"
+[exercise7-2 9d06a00] Adding a new feature
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 feature.txt
+PS D:\git_exercises\advanced-git-exercises> git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+PS D:\git_exercises\advanced-git-exercises> git add hello.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Master has continued to change"
+[master c57724b] Master has continued to change
+ 1 file changed, 1 insertion(+)
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise7-2
+Switched to branch 'exercise7-2'
+PS D:\git_exercises\advanced-git-exercises> git rebase master
+Successfully rebased and updated refs/heads/exercise7-2.
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+f5a804c (HEAD -> exercise7-2) Adding a new feature
+c57724b (master) Master has continued to change
+43388fe (origin/master, origin/exercise7, origin/exercise4, origin/exercise2, origin/HEAD) Initial commit
+PS D:\git_exercises\advanced-git-exercises> echo "Another new feature" > another_feature.txt
+PS D:\git_exercises\advanced-git-exercises> git add another_feature.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Adding another new feature"
+[exercise7-2 0b6078a] Adding another new feature
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 another_feature.txt
+PS D:\git_exercises\advanced-git-exercises> git log -n 3 --oneline
+0b6078a (HEAD -> exercise7-2) Adding another new feature
+f5a804c Adding a new feature
+c57724b (master) Master has continued to change
+PS D:\git_exercises\advanced-git-exercises> git rebase -i HEAD~2
+
+Successfully rebased and updated refs/heads/exercise7-2.
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+0b6078a (HEAD -> exercise7-2) Adding another new feature
+f5a804c Adding a new feature
+c57724b (master) Master has continued to change
+43388fe (origin/master, origin/exercise7, origin/exercise4, origin/exercise2, origin/HEAD) Initial commit
