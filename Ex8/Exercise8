@@ -1,0 +1,63 @@
+PS D:\git_exercises\advanced-git-exercises> git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+PS D:\git_exercises\advanced-git-exercises> git remote -v
+origin  https://github.com/nnja/advanced-git-exercises.git (fetch)
+origin  https://github.com/nnja/advanced-git-exercises.git (push)
+PS D:\git_exercises\advanced-git-exercises> git remote rename origin upstream
+Renaming remote references: 100% (11/11), done.
+PS D:\git_exercises\advanced-git-exercises> git remote -v
+upstream        https://github.com/nnja/advanced-git-exercises.git (fetch)
+upstream        https://github.com/nnja/advanced-git-exercises.git (push)
+PS D:\git_exercises\advanced-git-exercises> git remote add https://github.com/meredithoopis/Forking
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch> master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+PS D:\git_exercises\advanced-git-exercises> git remote -v
+upstream        https://github.com/nnja/advanced-git-exercises.git (fetch)
+upstream        https://github.com/nnja/advanced-git-exercises.git (push)
+PS D:\git_exercises\advanced-git-exercises> git remote add origin https://github.com/meredithoopis/Forking
+PS D:\git_exercises\advanced-git-exercises> git remote -v
+origin  https://github.com/meredithoopis/Forking (fetch)
+origin  https://github.com/meredithoopis/Forking (push)
+upstream        https://github.com/nnja/advanced-git-exercises.git (fetch)
+upstream        https://github.com/nnja/advanced-git-exercises.git (push)
+PS D:\git_exercises\advanced-git-exercises> git checkout master
+Already on 'master'
+Your branch is ahead of 'upstream/master' by 1 commit.
+  (use "git push" to publish your local commits)
+PS D:\git_exercises\advanced-git-exercises> git branch --set-upstream-to origin/master
+fatal: the requested upstream branch 'origin/master' does not exist
+hint:
+hint: If you are planning on basing your work on an upstream
+hint: branch that already exists at the remote, you may need to
+hint: run "git fetch" to retrieve it.
+hint:
+hint: If you are planning to push out a new local branch that
+hint: will track its remote counterpart, you may want to use
+hint: "git push -u" to set the upstream config as you push.
+hint: Disable this message with "git config advice.setUpstreamFailure false"
+PS D:\git_exercises\advanced-git-exercises> git checkout -b `feature`
+fatal: '?eature`' is not a valid branch name
+PS D:\git_exercises\advanced-git-exercises> echo "Change to local repo" > local_change.txt
+PS D:\git_exercises\advanced-git-exercises>  git add local_change.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Change to local repo"
+[master 9d1b99a] Change to local repo
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 local_change.txt
+PS D:\git_exercises\advanced-git-exercises>  git pull --rebase upstream master
+From https://github.com/nnja/advanced-git-exercises
+ * branch            master     -> FETCH_HEAD
+Current branch master is up to date.
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+9d1b99a (HEAD -> master) Change to local repo
+c57724b Master has continued to change
+43388fe (upstream/master, upstream/exercise7, upstream/exercise4, upstream/exercise2, upstream/HEAD) Initial commit
