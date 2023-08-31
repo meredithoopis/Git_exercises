@@ -1,0 +1,81 @@
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise5
+error: you need to resolve your current index first
+hello.txt: needs merge
+PS D:\git_exercises\advanced-git-exercises> git merge mundo
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise5
+error: you need to resolve your current index first
+hello.txt: needs merge
+PS D:\git_exercises\advanced-git-exercises> git merge mundo
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+PS D:\git_exercises\advanced-git-exercises> git add hello.txt
+PS D:\git_exercises\advanced-git-exercises> git commit
+[exercise4 29b8c1c] Merge branch 'mundo' into exercise4
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise5
+Switched to a new branch 'exercise5'
+branch 'exercise5' set up to track 'origin/exercise5'.
+PS D:\git_exercises\advanced-git-exercises> cat hello.txt
+Greeting Hanh
+PS D:\git_exercises\advanced-git-exercises> git mv hello.txt hello.template
+PS D:\git_exercises\advanced-git-exercises> git add hello.template
+PS D:\git_exercises\advanced-git-exercises> git commit
+[exercise5 37fa776] Changing file name
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+ create mode 100644 hello.template
+ delete mode 100644 hello.txt
+PS D:\git_exercises\advanced-git-exercises> git log --since="yesterday"
+commit 37fa776b2e1cc5959a803a98f3bbde9e342996c0 (HEAD -> exercise5)
+Author: Hanh <nthhanh.work.01@gmail.com>
+Date:   Thu Aug 31 23:52:38 2023 +0700
+
+    Changing file name
+PS D:\git_exercises\advanced-git-exercises> git log --name-status --follow --oneline hello.template
+37fa776 (HEAD -> exercise5) Changing file name
+A       hello.template
+PS D:\git_exercises\advanced-git-exercises> git log --grep=i18n --author=nina --since=2.weeks
+PS D:\git_exercises\advanced-git-exercises> git log --diff-filter=R --find-renames
+PS D:\git_exercises\advanced-git-exercises> git log --grep=i18n --author=nina --since=2.weeks
+PS D:\git_exercises\advanced-git-exercises> git log --diff-filter=M --oneline
+fec9e7b Changing Hello to Hola
+afa34a6 Changing World to Mundo
+e348ebc (origin/exercise3) Testing the emergency git-casting system
+PS D:\git_exercises\advanced-git-exercises> git log --grep=i18n --oneline
+PS D:\git_exercises\advanced-git-exercises> git show 4b2b90e
+commit 4b2b90ec4f526139ca9c81e22174ebf5b9c56b52 (origin/exercise6)
+Author: Nina Zakharenko <nina@nnja.io>
+Date:   Wed Oct 4 20:46:45 2017 -0700
+
+    Replacing greeting with tokens for i18n
+
+    Currently, hello.txt contains both Spanish and English.
+    Let's replace Hola with a [greeting] token, and Mundo
+    with a [noun] token. That way, we can localize hello.txt for
+    any language!
+
+diff --git a/hello.txt b/hello.template
+similarity index 73%
+rename from hello.txt
+rename to hello.template
+index 7018e35..a6c57ac 100644
+--- a/hello.txt
++++ b/hello.template
+@@ -1,2 +1,2 @@
+-Hola Mundo!
++[greeting] [noun]!
+ This is a test of the emergency git-casting system.
+PS D:\git_exercises\advanced-git-exercises> git show 4b2b90e --stat --oneline
+4b2b90e (origin/exercise6) Replacing greeting with tokens for i18n
+ hello.txt => hello.template | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS D:\git_exercises\advanced-git-exercises> git branch --merged master
+  master
+PS D:\git_exercises\advanced-git-exercises> git branch --no-merged master
+  exercise4
+* exercise5
+  mundo
