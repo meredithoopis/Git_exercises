@@ -1,0 +1,120 @@
+PS D:\git_exercises> cd advanced-git-exercises
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise4
+Switched to a new branch 'exercise4'
+branch 'exercise4' set up to track 'origin/exercise4'.
+PS D:\git_exercises\advanced-git-exercises> git merge exercise3
+merge: exercise3 - not something we can merge
+
+Did you mean this?
+        origin/exercise3
+PS D:\git_exercises\advanced-git-exercises> git merge origin/exercise3
+Updating 43388fe..e348ebc
+Fast-forward
+ hello.txt | 1 +
+ 1 file changed, 1 insertion(+)
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+e348ebc (HEAD -> exercise4, origin/exercise3) Testing the emergency git-casting system
+43388fe (origin/master, origin/exercise7, origin/exercise4, origin/exercise2, origin/HEAD, master) Initial commit
+PS D:\git_exercises\advanced-git-exercises> git reset --hard HEAD^
+HEAD is now at 43388fe Initial commit
+PS D:\git_exercises\advanced-git-exercises> git merge --no-ff exercise3
+merge: exercise3 - not something we can merge
+
+Did you mean this?
+        origin/exercise3
+PS D:\git_exercises\advanced-git-exercises> git merge --no-ff origin/exercise3
+Merge made by the 'ort' strategy.
+ hello.txt | 1 +
+ 1 file changed, 1 insertion(+)
+PS D:\git_exercises\advanced-git-exercises> git log --graph
+*   commit bbad91ca1246e77bfa5a2cc7661aec5ca2bdb69a (HEAD -> exercise4)
+|\  Merge: 43388fe e348ebc
+| | Author: Hanh <nthhanh.work.01@gmail.com>
+| | Date:   Thu Aug 31 23:44:13 2023 +0700
+| |
+| |     Merge remote-tracking branch 'origin/exercise3' into exercise4
+| |
+| * commit e348ebc1187cb3b4066b1e9432a614b464bf9d07 (origin/exercise3)
+|/  Author: Nina Zakharenko <nina@nnja.io>
+|   Date:   Wed Oct 4 19:01:12 2017 -0700
+|
+|       Testing the emergency git-casting system
+|
+* commit 43388fee19744e8893467331d7853a6475a227b8 (origin/master, origin/exercise7, origin/exercise4, origin/exercise2, origin/HEAD, master)
+  Author: Nina Zakharenko <nina@nnja.io>
+  Date:   Wed Oct 4 18:51:49 2017 -0700
+
+      Initial commit
+PS D:\git_exercises\advanced-git-exercises> git branch
+* exercise4
+  master
+PS D:\git_exercises\advanced-git-exercises> git checkout -b mundo
+Switched to a new branch 'mundo'
+PS D:\git_exercises\advanced-git-exercises> git branch
+  exercise4
+  master
+* mundo
+PS D:\git_exercises\advanced-git-exercises> git status
+On branch mundo
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   hello.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS D:\git_exercises\advanced-git-exercises> git add hello.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Changing World to Mundo"
+[mundo 699d56a] Changing World to Mundo
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise4
+Switched to branch 'exercise4'
+Your branch is ahead of 'origin/exercise4' by 2 commits.
+  (use "git push" to publish your local commits)
+PS D:\git_exercises\advanced-git-exercises> git add hello.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Changing Hello to Hola"
+[exercise4 4b730df] Changing Hello to Hola
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+PS D:\git_exercises\advanced-git-exercises> git config rerere.enabled true
+PS D:\git_exercises\advanced-git-exercises> git merge mundo
+Auto-merging hello.txt
+CONFLICT (content): Merge conflict in hello.txt
+Recorded preimage for 'hello.txt'
+Automatic merge failed; fix conflicts and then commit the result.
+PS D:\git_exercises\advanced-git-exercises> git rerere diff
+--- a/hello.txt
++++ b/hello.txt
+@@ -1,6 +1,6 @@
+-<<<<<<<
+-Hello Mundo
+-=======
++<<<<<<< HEAD
+ Hola World!
+->>>>>>>
++=======
++Hello Mundo
++>>>>>>> mundo
+
+PS D:\git_exercises\advanced-git-exercises> git rerere diff
+--- a/hello.txt
++++ b/hello.txt
+@@ -1,6 +1,3 @@
+-<<<<<<<
+ Hello Mundo
+-=======
+-Hola World!
+->>>>>>>
++
+
+PS D:\git_exercises\advanced-git-exercises> git add hello.txt
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Merging in mundo branch"
+Recorded resolution for 'hello.txt'.
+[exercise4 962c81c] Merging in mundo branch
+PS D:\git_exercises\advanced-git-exercises> git reset --hard HEAD^
+HEAD is now at 4b730df Changing Hello to Hola
+PS D:\git_exercises\advanced-git-exercises> git merge mundo
+Auto-merging hello.txt
+CONFLICT (content): Merge conflict in hello.txt
+Resolved 'hello.txt' using previous resolution.
+Automatic merge failed; fix conflicts and then commit the result.
+PS D:\git_exercises\advanced-git-exercises> cat hello.txt
+Hello Mundo
