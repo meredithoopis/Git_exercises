@@ -1,0 +1,17 @@
+PS D:\> cd git_exercises
+PS D:\git_exercises> cd advanced-git-exercises
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise10
+branch 'exercise10' set up to track 'upstream/exercise10'.
+Switched to a new branch 'exercise10'
+PS D:\git_exercises\advanced-git-exercises> cp pre-commit .git/hooks/pre-commit
+PS D:\git_exercises\advanced-git-exercises> chmod +x .git/hooks/pre-commit
+PS D:\git_exercises\advanced-git-exercises> echo "Bad bash script" > test_script.sh
+PS D:\git_exercises\advanced-git-exercises> git add test_script.sh
+PS D:\git_exercises\advanced-git-exercises>  git commit -m "Adding a new test script"
+No shebang found! Not allowed to commit!
+PS D:\git_exercises\advanced-git-exercises> echo '#!/bin/bash\n Good bash script' > test_script.sh
+PS D:\git_exercises\advanced-git-exercises>  git add test_script.sh
+PS D:\git_exercises\advanced-git-exercises>  git commit -m "Adding a new test script"
+[exercise10 3b6e051] Adding a new test script
+ 1 file changed, 2 insertions(+)
+ create mode 100644 test_script.sh
