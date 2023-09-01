@@ -1,0 +1,103 @@
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise9
+Switched to a new branch 'exercise9'
+branch 'exercise9' set up to track 'upstream/exercise9'.
+PS D:\git_exercises\advanced-git-exercises> git grep e- "Python"
+fatal: ambiguous argument 'Python': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+PS D:\git_exercises\advanced-git-exercises> ^B
+
+PS D:\git_exercises\advanced-git-exercises> git grep -e "Python"
+python_code.py:# This is a Python file
+python_code.py:    print("Welcome to Python!")
+PS D:\git_exercises\advanced-git-exercises> git grep --line-number --heading --break -e "Python"
+python_code.py
+1:# This is a Python file
+4:    print("Welcome to Python!")
+PS D:\git_exercises\advanced-git-exercises> echo "More Python code" >> python_code.py
+PS D:\git_exercises\advanced-git-exercises> git grep --line-number -e "Python"
+Binary file python_code.py matches
+PS D:\git_exercises\advanced-git-exercises> git grep --line-number --cached -e "Python"
+python_code.py:1:# This is a Python file
+python_code.py:4:    print("Welcome to Python!")
+PS D:\git_exercises\advanced-git-exercises> git add python_code.py
+PS D:\git_exercises\advanced-git-exercises> git grep --line-number --cached -e "Python"
+Binary file python_code.py matches
+PS D:\git_exercises\advanced-git-exercises> git checkout python_code.py
+Updated 0 paths from the index
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+88f6e28 (HEAD -> exercise9, upstream/exercise9) Adding bash, python, and java code examples
+43388fe (upstream/master, upstream/exercise7, upstream/exercise4, upstream/exercise2, upstream/HEAD) Initial commit
+PS D:\git_exercises\advanced-git-exercises> git log exercise3 --oneline
+fatal: ambiguous argument 'exercise3': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+88f6e28 (HEAD -> exercise9, upstream/exercise9) Adding bash, python, and java code examples
+43388fe (upstream/master, upstream/exercise7, upstream/exercise4, upstream/exercise2, upstream/HEAD) Initial commit
+PS D:\git_exercises\advanced-git-exercises> git log exercise3 --oneline
+fatal: ambiguous argument 'exercise3': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+PS D:\git_exercises\advanced-git-exercises> git checkout exercise3
+error: Your local changes to the following files would be overwritten by checkout:
+        python_code.py
+Please commit your changes or stash them before you switch branches.
+Aborting
+PS D:\git_exercises\advanced-git-exercises> git cherry-pick e348ebc
+error: your local changes would be overwritten by cherry-pick.
+hint: commit your changes or stash them to proceed.
+fatal: cherry-pick failed
+PS D:\git_exercises\advanced-git-exercises>  git log --oneline
+88f6e28 (HEAD -> exercise9, upstream/exercise9) Adding bash, python, and java code examples
+43388fe (upstream/master, upstream/exercise7, upstream/exercise4, upstream/exercise2, upstream/HEAD) Initial commit
+PS D:\git_exercises\advanced-git-exercises> git blame hello.txt
+^43388fe (Nina Zakharenko 2017-10-04 18:51:49 -0700 1) Hello World!
+PS D:\git_exercises\advanced-git-exercises> git rm java_code.java
+rm 'java_code.java'
+PS D:\git_exercises\advanced-git-exercises> git commit -m "Who uses Java anyway?"
+[exercise9 9b233ba] Who uses Java anyway?
+ 2 files changed, 7 deletions(-)
+ delete mode 100644 java_code.java
+PS D:\git_exercises\advanced-git-exercises> git log --diff-filter=D -- java_code.java
+commit 9b233bac71d34b59233bbe4e523b6ef3782681d9 (HEAD -> exercise9)
+Author: Hanh <nthhanh.work.01@gmail.com>
+Date:   Fri Sep 1 08:55:48 2023 +0700
+
+    Who uses Java anyway?
+PS D:\git_exercises\advanced-git-exercises> git blame  9b233bac71d34b59233bbe4e523b6ef3782681d9^ java_code.java
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 1) // This is a Java file
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 2)
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 3) public class HelloWorld {
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 4)    public static void main(String[] args) {
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 5)       System.out.println("Привет от Java!");
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 6)    }
+88f6e286 (Nina Zakharenko 2017-10-05 11:31:34 -0700 7) }
+PS D:\git_exercises\advanced-git-exercises> git log --oneline
+9b233ba (HEAD -> exercise9) Who uses Java anyway?
+88f6e28 (upstream/exercise9) Adding bash, python, and java code examples
+43388fe (upstream/master, upstream/exercise7, upstream/exercise4, upstream/exercise2, upstream/HEAD) Initial commit
+PS D:\git_exercises\advanced-git-exercises> git bisect start 9b233ba 43388fe
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[88f6e2864bd0829c71654f1d19096f436a66ce07] Adding bash, python, and java code examples
+PS D:\git_exercises\advanced-git-exercises> cat hello.txt
+Hello World!
+PS D:\git_exercises\advanced-git-exercises> git bisect bad
+88f6e2864bd0829c71654f1d19096f436a66ce07 is the first bad commit
+commit 88f6e2864bd0829c71654f1d19096f436a66ce07
+Author: Nina Zakharenko <nina@nnja.io>
+Date:   Thu Oct 5 11:31:34 2017 -0700
+
+    Adding bash, python, and java code examples
+
+ bash_code.sh   | 3 +++
+ java_code.java | 7 +++++++
+ python_code.py | 4 ++++
+ 3 files changed, 14 insertions(+)
+ create mode 100644 bash_code.sh
+ create mode 100644 java_code.java
+ create mode 100644 python_code.py
+PS D:\git_exercises\advanced-git-exercises> cat hello.txt
+Hello World!
+PS D:\git_exercises\advanced-git-exercises> git bisect good
+88f6e2864bd0829c71654f1d19096f436a66ce07 was both good and bad
